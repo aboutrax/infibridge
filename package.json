@@ -26,6 +26,7 @@
 		"@better-auth/cli": "~1.4.21",
 		"@eslint/compat": "^2.0.4",
 		"@eslint/js": "^10.0.1",
+		"@iconify/json": "^2.2.477",
 		"@inlang/paraglide-js": "^2.15.2",
 		"@playwright/test": "^1.59.1",
 		"@sveltejs/adapter-node": "^5.5.4",
