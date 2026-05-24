@@ -10,5 +10,8 @@
 <svelte:head><link rel="icon" href={favicon} /></svelte:head>
 
 <ModeWatcher />
-<Toaster richColors={true} position="top-right" />
-{@render children()}
+<Toaster richColors={true} position="top-right" closeButton />
+
+<div class="flex min-h-[inherit] flex-col">
+	{@render children()}
+</div>
