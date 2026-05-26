@@ -1,5 +1,5 @@
 {
-	"name": "infisical-bridge",
+	"name": "infibridge",
 	"private": true,
 	"version": "0.0.1",
 	"type": "module",
@@ -26,6 +26,7 @@
 		"@better-auth/cli": "latest",
 		"@eslint/compat": "^2.0.4",
 		"@eslint/js": "latest",
+		"@fontsource-variable/geist": "^5.2.9",
 		"@fontsource-variable/inter": "^5.2.8",
 		"@iconify/json": "^2.2.477",
 		"@inlang/paraglide-js": "^2.15.2",
@@ -69,6 +70,7 @@
 		"vitest-browser-svelte": "^2.1.0"
 	},
 	"dependencies": {
+		"@infisical/sdk": "^5.0.2",
 		"mode-watcher": "^1.1.0",
 		"svelte-sonner": "^1.1.1"
 	}
