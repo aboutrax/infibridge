@@ -15,7 +15,7 @@
 </script>
 
 <svelte:head>
-	<title>Accueil</title>
+	<title>Home</title>
 </svelte:head>
 
 <main class="flex min-h-[inherit] items-center justify-center p-4">
