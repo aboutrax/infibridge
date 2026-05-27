@@ -3,7 +3,6 @@
 	import { Label } from '$lib/components/ui/label/index.js';
 	import { Input } from '$lib/components/ui/input/index.js';
 	import * as Card from '$lib/components/ui/card/index.js';
-	import ThemeSwitcher from '$lib/components/app/ThemeSwitcher.svelte';
 
 	import * as Alert from '$lib/components/ui/alert/index.js';
 	import AlertCircleIcon from '@lucide/svelte/icons/alert-circle';
@@ -15,17 +14,14 @@
 </script>
 
 <svelte:head>
-	<title>Home</title>
+	<title>Infibridge</title>
 </svelte:head>
 
-<main class="flex min-h-[inherit] items-center justify-center p-4">
+<main class="flex justify-center p-4">
 	<Card.Root class="w-full max-w-sm">
 		<Card.Header>
 			<Card.Title>Login to your account</Card.Title>
 			<Card.Description>Enter your email below to login to your account</Card.Description>
-			<Card.Action>
-				<ThemeSwitcher />
-			</Card.Action>
 		</Card.Header>
 		<Card.Content>
 			<form method="post" action="?/signInEmail" id="form" use:enhance>
