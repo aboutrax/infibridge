@@ -8,6 +8,8 @@ A self-hosted webhook bridge that syncs [Infisical](https://infisical.com) secre
 
 When a secret changes in Infisical, Infisical fires a webhook to this bridge. The bridge verifies the signature, fetches the latest secrets, diffs them against the current environment variables, and applies only the changes.
 
+</div>
+
 ---
 
 ## How it works
@@ -60,19 +62,21 @@ cp .env.example .env
 Fill in your values:
 
 ```bash
-# Postgres password — pick anything strong
 POSTGRES_PASSWORD=""
 
 # Database (Docker Compose — host is 'db', port 5432)
 # For local dev with Docker:
-DATABASE_URL="postgres://root:mysecretpassword@localhost:15432/local"
+# DATABASE_URL="postgres://root:mysecretpassword@localhost:15432/local"
 # For production with Docker Compose:
 DATABASE_URL="postgres://infibridge:${POSTGRES_PASSWORD}@db:5432/infibridge"
 
 # Your public URL (e.g. https://infibridge.example.com)
 ORIGIN="https://infibridge.example.com"
 
+# Better Auth
+# For production use 32 characters and generated with high entropy
 # https://www.better-auth.com/docs/installation
+# Generate with: openssl rand -base64 32
 BETTER_AUTH_SECRET=""
 
 # Must be exactly 64 hex characters. Generate with: openssl rand -hex 32
