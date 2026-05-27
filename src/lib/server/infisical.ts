@@ -1,6 +1,20 @@
+import { InfisicalSDK } from '@infisical/sdk';
 import { createHmac, timingSafeEqual } from 'crypto';
 
 const FIVE_MINUTES = 5 * 60 * 1000;
+
+export async function verifyInfisicalCredentials(
+    infisicalUrl: string,
+    clientId: string,
+    clientSecret: string,
+    projectId: string,
+    environment: string,
+    secretPath: string
+): Promise<void> {
+    const client = new InfisicalSDK({ siteUrl: infisicalUrl });
+    await client.auth().universalAuth.login({ clientId, clientSecret });
+    await client.secrets().listSecrets({ projectId, environment, secretPath });
+}
 
 export function verifyInfisicalSignature(rawBody: string, signature: string, secret: string): boolean {
     const parts = signature.split(';');
