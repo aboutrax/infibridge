@@ -4,7 +4,11 @@ import { adminAc, defaultStatements, userAc } from 'better-auth/plugins/admin/ac
 export const statement = {
     ...defaultStatements,
     user: [...defaultStatements.user, 'view'],
-    profile: ['view']
+    profile: ['view'],
+    infisicalEnv: ['view', 'list', 'create', 'get', 'update', 'delete'],
+    project: ['view', 'list', 'list-service', 'create', 'get', 'update', 'delete'],
+    convexService: ['view', 'list', 'create', 'get', 'update', 'delete'],
+    dokployService: ['view', 'list', 'create', 'get', 'update', 'delete']
 } as const;
 
 export const ac = createAccessControl(statement);
@@ -12,12 +16,20 @@ export const ac = createAccessControl(statement);
 export const admin = ac.newRole({
     ...adminAc.statements,
     user: [...adminAc.statements.user, ...statement.user],
-    profile: [...statement.profile]
+    profile: [...statement.profile],
+    infisicalEnv: [...statement.infisicalEnv],
+    project: [...statement.project],
+    convexService: [...statement.convexService],
+    dokployService: [...statement.dokployService],
 });
 
 export const user = ac.newRole({
     ...userAc.statements,
-    profile: ['view']
+    profile: ['view'],
+    infisicalEnv: [],
+    project: ['view', 'list-service'],
+    convexService: ['view', 'list', 'get'],
+    dokployService: ['view', 'list', 'get']
 });
 
 export const userRoleMap = {
