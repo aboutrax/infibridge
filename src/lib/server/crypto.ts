@@ -1,8 +1,8 @@
 import { createCipheriv, createDecipheriv, randomBytes } from 'crypto';
-import { ENCRYPTION_KEY } from '$env/static/private';
+import { env } from '$env/dynamic/private';
 
 const ALGORITHM = 'aes-256-gcm';
-const KEY = Buffer.from(ENCRYPTION_KEY, 'hex');
+const KEY = Buffer.from(env.ENCRYPTION_KEY, 'hex');
 
 export function encrypt(plaintext: string): string {
     const iv = randomBytes(12);
