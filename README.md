@@ -61,7 +61,13 @@ Fill in your values:
 
 ```bash
 # Postgres password — pick anything strong
-POSTGRES_PASSWORD="change_me"
+POSTGRES_PASSWORD=""
+
+# Database (Docker Compose — host is 'db', port 5432)
+# For local dev with Docker:
+DATABASE_URL="postgres://root:mysecretpassword@localhost:15432/local"
+# For production with Docker Compose:
+DATABASE_URL="postgres://infibridge:${POSTGRES_PASSWORD}@db:5432/infibridge"
 
 # Your public URL (e.g. https://infibridge.example.com)
 ORIGIN="https://infibridge.example.com"
