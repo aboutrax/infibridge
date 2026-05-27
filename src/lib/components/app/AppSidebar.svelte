@@ -2,8 +2,12 @@
 	import * as Sidebar from '$lib/components/ui/sidebar/index.js';
 	import { resolve } from '$app/paths';
 
+	import EnvIcon from '~icons/eos-icons/env';
 	import DashboardIcon from '~icons/material-symbols/dashboard-outline';
+	import ProjectIcon from '~icons/pajamas/project';
 	import ProfileIcon from '~icons/iconamoon/profile';
+
+	import logo from '$lib/assets/img/logo.png';
 
 	import UserButton from '$lib/components/user/UserButton.svelte';
 	import { page } from '$app/state';
@@ -15,15 +19,28 @@
 
 	const { setOpenMobile } = Sidebar.useSidebar();
 
-	const items = [
+	const items = $derived([
 		{
 			title: 'Dashboard',
 			url: resolve('/workspace/dashboard'),
-			icon: DashboardIcon
+			icon: DashboardIcon,
+			canView: true
+		},
+		{
+			title: 'Projects',
+			url: resolve('/workspace/project'),
+			icon: ProjectIcon,
+			canView: hasPermission(roles, 'project', 'view')
 		}
-	];
+	]);
 
 	const settingItems = $derived([
+		{
+			title: 'Infisical Envs',
+			url: resolve('/workspace/infisical-env'),
+			icon: EnvIcon,
+			canView: hasPermission(roles, 'infisicalEnv', 'view')
+		},
 		{
 			title: 'Profile',
 			url: resolve('/workspace/profile'),
@@ -34,22 +51,40 @@
 </script>
 
 <Sidebar.Root collapsible="icon" variant="floating">
+	<Sidebar.Header>
+		<Sidebar.Menu>
+			<Sidebar.MenuItem>
+				<Sidebar.MenuButton>
+					{#snippet child({ props })}
+						<a href={resolve('/workspace/dashboard')} {...props}>
+							<img src={logo} alt="Infibridge Logo" class="size-8 shrink-0" />
+							<span class="text-xl font-semibold">
+								Infi<span class="text-blue-500">bridge</span>
+							</span>
+						</a>
+					{/snippet}
+				</Sidebar.MenuButton>
+			</Sidebar.MenuItem>
+		</Sidebar.Menu>
+	</Sidebar.Header>
 	<Sidebar.Content>
 		<Sidebar.Group>
 			<Sidebar.GroupLabel>Home</Sidebar.GroupLabel>
 			<Sidebar.GroupContent>
 				<Sidebar.Menu>
 					{#each items as item (item.title)}
-						<Sidebar.MenuItem>
-							<Sidebar.MenuButton isActive={page.url.pathname.startsWith(item.url)}>
-								{#snippet child({ props })}
-									<a href={item.url} {...props} onclick={() => setOpenMobile(false)}>
-										<item.icon />
-										<span>{item.title}</span>
-									</a>
-								{/snippet}
-							</Sidebar.MenuButton>
-						</Sidebar.MenuItem>
+						{#if item.canView}
+							<Sidebar.MenuItem>
+								<Sidebar.MenuButton isActive={page.url.pathname.startsWith(item.url)}>
+									{#snippet child({ props })}
+										<a href={item.url} {...props} onclick={() => setOpenMobile(false)}>
+											<item.icon />
+											<span>{item.title}</span>
+										</a>
+									{/snippet}
+								</Sidebar.MenuButton>
+							</Sidebar.MenuItem>
+						{/if}
 					{/each}
 				</Sidebar.Menu>
 			</Sidebar.GroupContent>
